@@ -1,8 +1,8 @@
-# MangaFox Scraper
+# Kissmanga Scraper
 
-Search and download manga from [mangafox.me](http://mangafox.me/)
+Search and download manga from [kissmanga.com](http://kissmanga.com/)
 
-MangaFox Scraper is a library that gets all the needed information about manga for a manga-reader
+Kissmanga Scraper is a library that gets all the needed information about manga for a manga-reader
 
 ## Requirements
 
@@ -13,7 +13,7 @@ PHP 7.0.0 or later.
 You can install it via [Composer](https://getcomposer.org/) by typing the following command:
 
 ```bash
-composer require railken/mangafox
+composer require railken/Kissmanga
 ```
 
 
@@ -29,7 +29,7 @@ Simple usage looks like:
 ```php
 
 # Creating a new instance of manager
-$manager = new \Railken\Mangafox\Mangafox();
+$manager = new \Railken\Kissmanga\Kissmanga();
 
 # Searching a manga
 $results = $manager
