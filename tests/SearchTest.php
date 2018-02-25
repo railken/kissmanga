@@ -24,39 +24,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidTypeException
-     */
-    public function testKissmangaSearchBuilderInvalidTypeException()
-    {
-        $this->manager->search()->type('wrong');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidNameFilterException
-     */
-    public function testKissmangaSearchBuilderInvalidNameFilterException()
-    {
-        $this->manager->search()->name('wrong', 'One Piece');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidAuthorFilterException
-     */
-    public function testKissmangaSearchBuilderInvalidAuthorFilterException2()
-    {
-        $this->manager->search()->author('wrong', 'Oda Eiichiro');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidArtistFilterException
-     */
-    public function testKissmangaSearchBuilderInvalidArtistFilterException3()
-    {
-        $this->manager->search()->artist('wrong', 'Oda Eiichiro');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidGenresFilterException
+     * @expectedException Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidGenresFilterException
      */
     public function testKissmangaSearchBuilderInvalidGenresFilterException()
     {
@@ -64,7 +32,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidGenresValueException
+     * @expectedException Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidGenresValueException
      */
     public function testKissmangaSearchBuilderInvalidGenresValueException()
     {
@@ -72,57 +40,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidSortByDirectionException
-     */
-    public function testKissmangaSearchBuilderInvalidSortByDirectionException()
-    {
-        $this->manager->search()->sortBy('name', 'wrong');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidSortByValueException
-     */
-    public function testKissmangaSearchBuilderInvalidSortByValueException()
-    {
-        $this->manager->search()->sortBy('wrong', 'asc');
-    }
-
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidReleasedYearFilterException
-     */
-    public function testKissmangaSearchBuilderInvalidReleasedYearFilterException()
-    {
-        $this->manager->search()->releasedYear('wrong', '2017');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidReleasedYearValueException
-     */
-    public function testKissmangaSearchBuilderInvalidReleasedYearValueException()
-    {
-        $this->manager->search()->releasedYear('<', 'wrong');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidRatingFilterException
-     */
-    public function testKissmangaSearchBuilderInvalidRatingFilterException()
-    {
-        $this->manager->search()->rating('wrong', '5');
-    }
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidRatingValueException
-     */
-    public function testKissmangaSearchBuilderInvalidRatingValueException()
-    {
-        $this->manager->search()->rating('<', 'wrong');
-    }
-
-
-    /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaSearchBuilderInvalidCompletedValueException
+     * @expectedException Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidCompletedValueException
      */
     public function testKissmangaSearchBuilderInvalidCompletedValueException()
     {
@@ -139,19 +57,15 @@ class SearchTest extends TestCase
         # Search manga
         $results = $m
             ->search()
-            ->type('any')
-            ->name('contains', 'One Piece')
-            ->author('contains', 'Oda Eiichiro')
-            ->artist('contains', 'Oda Eiichiro')
-            ->genres('include', ['Action', 'Drama', 'Historical'])
-            ->releasedYear('<', '2017')
-            ->rating('>', 4)
-            ->completed(0)
-            ->page(1)
-            ->sortBy('name', 'ASC')
+            ->name('One Piece')
+            ->author('Oda Eiichiro')
+            ->genres('include', ['Action', 'Drama', 'Adventure'])
+            ->completed(1)
             ->get();
 
         $results = $results->results;
+
+        print_r($results);
         
         $manga = $results->filter(function($v) {
             return $v->uid == 'one_piece';

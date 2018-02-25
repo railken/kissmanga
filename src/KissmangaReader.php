@@ -4,7 +4,7 @@ namespace Railken\Kissmanga;
 
 use GuzzleHttp\Client;
 
-abstract class MangaReader implements MangaReaderContract
+abstract class KissmangaReader implements MangaReaderContract
 {
 
     /**

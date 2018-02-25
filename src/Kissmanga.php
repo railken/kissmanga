@@ -84,7 +84,7 @@ class Kissmanga extends KissmangaReader
      */
     public function search()
     {
-        return new KissmangaSearchBuilder($this);
+        return new API\Searcher\Builder($this);
     }
 
     /**
