@@ -130,7 +130,7 @@ class Kissmanga extends KissmangaReader
      */
     public function directory()
     {
-        return new KissmangaDirectoryBuilder($this);
+        return $this->search();
     }
 
     /**
@@ -140,7 +140,7 @@ class Kissmanga extends KissmangaReader
      */
     public function index()
     {
-        return new KissmangaIndexBuilder($this);
+        return $this->search();
     }
 
     /**
