@@ -34,9 +34,9 @@ class ResourceTest extends TestCase
     public function testBasics()
     {
       
-        $manga = $this->manager->resource('fairy_tail')->get();
+        $manga = $this->manager->resource('fairy-tail')->get();
 
-        $this->assertEquals('fairy_tail', $manga->uid);
+        $this->assertEquals('fairy-tail', $manga->uid);
 
 
     }

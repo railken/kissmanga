@@ -96,7 +96,7 @@ class Kissmanga extends KissmangaReader
      */
     public function resource($uid = null)
     {
-        return (new KissmangaResourceBuilder($this))->uid($uid);
+        return (new API\Resource\Builder($this))->uid($uid);
     }
 
     /**
