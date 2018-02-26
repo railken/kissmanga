@@ -38,18 +38,20 @@ class Parser
 
         $bag = new Bag();
 
-        print_r($html);
-        $bag->set('results', new Collection($node->filter('.listing > tr')->each(function ($node) {
+        $bag->set('results', (new Collection($node->filter('.listing > tr')->each(function ($node) {
             $bag = new Bag();
 
-            $title = $node->filter("a.title");
+            $title = $node->filter('a:nth-child(1)');
+
+            if (count($title) === 0)
+                return null;
 
             return $bag
                 ->set('uid', basename($title->attr('href')))
-                ->set('name', $title->html())
-                ->set('status',  $node->filter('td')[1]->html())
-                ;
-        })));
+                ->set('name', trim($title->html()))
+            ;
+            
+        })))->filter(function($v) { return $v; })->values());
         
 
 

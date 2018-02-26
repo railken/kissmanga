@@ -60,24 +60,17 @@ class SearchTest extends TestCase
             ->name('One Piece')
             ->author('Oda Eiichiro')
             ->genres('include', ['Action', 'Drama', 'Adventure'])
-            ->completed(1)
+            ->completed(null)
             ->get();
 
         $results = $results->results;
-
-        print_r($results);
         
         $manga = $results->filter(function($v) {
-            return $v->uid == 'one_piece';
+            return $v->name == 'One Piece';
         })->first();
 
-        $this->assertEquals(106, $manga->id);
+        $this->assertEquals("One-Piece", $manga->uid);
 
-
-        // Send an empty request
-        $results = $m
-            ->search()
-            ->get();
 
     }
 }

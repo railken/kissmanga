@@ -36,10 +36,10 @@ class Request
         $params = [];
         
         # Name
-        $params['name'] = str_replace("%20", " ", $builder->getName()->get('value'));
+        $params['mangaName'] = str_replace("%20", " ", $builder->getName()->get('value'));
 
         # Author
-        $params['author'] = $builder->getAuthor()->get('value');
+        $params['authorArtist'] = $builder->getAuthor()->get('value');
 
         # Genres
         $params['genres'] = (new Collection($this->manager->getGenres()))->mapWithKeys(function ($item, $key) use ($builder) {
@@ -49,15 +49,19 @@ class Request
 
 
         # Is completed?
-        $builder->getCompleted() === null   && $params['status'] = 'Any';
-        $builder->getCompleted() === 0      && $params['status'] = 'Ongoing';
-        $builder->getCompleted() === 1      && $params['status'] = 'Completed';
+        $builder->getCompleted() == false   && $params['status'] = 'Ongoing';
+        $builder->getCompleted() == true    && $params['status'] = 'Completed';
+        $builder->getCompleted() === null   && $params['status'] = '';
 
 
-        print_r($params);
-        $results = $this->manager->request("POST", "/AdvanceSearch", $params);
+        $query = http_build_query($params, null, '&');
+        $string = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query); 
+
+        $results = $this->manager->request("POST", "/AdvanceSearch", $string);
 
         $parser = new Parser($this->manager);
+
+
 
         return $parser->parse($results);
     }

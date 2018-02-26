@@ -3,6 +3,9 @@
 namespace Railken\Kissmanga;
 
 use GuzzleHttp\Client;
+use KyranRana\CloudflareBypass\RequestMethod\CFStream;
+use KyranRana\CloudflareBypass\RequestMethod\CFCurl;
+use GuzzleHttp\Cookie\CookieJar;
 
 abstract class KissmangaReader implements MangaReaderContract
 {
@@ -17,7 +20,7 @@ abstract class KissmangaReader implements MangaReaderContract
      */
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => $this->urls['app']]);
+        $this->client = new Client(['base_uri' => $this->urls['app'], 'query_array_format' => 1]);
     }
 
     /**
@@ -32,10 +35,45 @@ abstract class KissmangaReader implements MangaReaderContract
         $params = [];
         $params['http_errors'] = false;
 
+     
+
+
+        $fullurl = $this->urls['app'].$url;
+        
+        $stream_cf_wrapper = new CFStream([
+            'cache'         => true,
+            'max_attempts'  => 5
+        ]);
+
+        $agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
+
+
+        $stream = $stream_cf_wrapper->create($fullurl, [
+            'http' => [
+                'method' => "GET",
+                'header' => "User-Agent:$agent"
+            ]
+        ]);
+
+        $params['headers'] = [
+            'User-Agent' => "$agent",
+        ];
+
+        $params['query_array_format'] = 1;
+        $params['cookies'] = CookieJar::fromArray($stream->getCookiesOriginal(), parse_url($this->urls['app'])['host']);
+
+        // $params['debug'] = true;
+
         switch ($method) {
             case 'POST': case 'PUT':
-                $params['form_params'] = $data;
 
+                if (is_string($data)) {
+                    $params['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
+                    $params['body'] = $data;
+                } else {
+
+                    $params['form_params'] = $data;
+                }
             break;
 
             default:
@@ -43,7 +81,6 @@ abstract class KissmangaReader implements MangaReaderContract
             break;
         }
 
-        
         $response = $this->client->request($method, $url, $params);
 
         $contents = $response->getBody()->getContents();
