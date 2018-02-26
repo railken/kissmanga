@@ -120,7 +120,7 @@ class Kissmanga extends KissmangaReader
      */
     public function releases()
     {
-        return new KissmangaReleasesBuilder($this);
+        return new API\Releases\Builder($this);
     }
 
     /**

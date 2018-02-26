@@ -1,11 +1,12 @@
 <?php
 
-namespace Railken\Kissmanga;
+namespace Railken\Kissmanga\API\Releases;
 
-use Railken\Kissmanga\Exceptions as Exceptions;
 use Illuminate\Support\Collection;
+use Railken\Bag;
+use Railken\Kissmanga\Kissmanga;
 
-class KissmangaReleasesBuilder
+class Builder
 {
 
     /**
@@ -59,7 +60,7 @@ class KissmangaReleasesBuilder
      */
     public function get()
     {
-        $request = new KissmangaReleasesRequest($this->manager);
+        $request = new Request($this->manager);
 
         return $request->send($this);
     }

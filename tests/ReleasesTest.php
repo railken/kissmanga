@@ -28,7 +28,6 @@ class ReleasesTest extends TestCase
     public function testBasics()
     {
 
-        $results = $this->manager->releases()->page(1)->get();
-
+        $this->assertEquals(50, $this->manager->releases()->page(1)->get()->results->count());
     }
 }
