@@ -50,8 +50,15 @@ class Parser
         return (new Collection($results[1]))->map(function ($result) use ($key, $iv) { 
             $bag = new Bag(); 
 
+            $url = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($result), MCRYPT_MODE_CBC, $iv);
 
-            $bag->set('scan', mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($result), MCRYPT_MODE_CBC, $iv)); 
+            $check = strpos($url, "http") !== false;
+
+            if (!$check) {
+                throw new Exceptions\ParserFailedDecryptScanException($url, $result, $iv, $key);
+            }
+
+            $bag->set('scan', $url); 
             return $bag; 
         }); 
  
