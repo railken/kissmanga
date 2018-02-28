@@ -1,8 +1,6 @@
 # Kissmanga Scraper
 
-Search and download manga from [kissmanga.com](http://kissmanga.com/)
-
-Kissmanga Scraper is a library that gets all the needed information about manga for a manga-reader
+Kissmanga Scraper is a php library that permits to search manga and download scans from [kissmanga.com](http://kissmanga.com/)
 
 ## Requirements
 
@@ -13,7 +11,7 @@ PHP 7.0.0 or later.
 You can install it via [Composer](https://getcomposer.org/) by typing the following command:
 
 ```bash
-composer require railken/Kissmanga
+composer require railken/kissmanga
 ```
 
 
@@ -34,39 +32,29 @@ $manager = new \Railken\Kissmanga\Kissmanga();
 # Searching a manga
 $results = $manager
     ->search()
-    ->type('any')
-    ->name('contains', 'One Piece')
-    ->author('contains', 'Oda Eiichiro')
-    ->artist('contains', 'Oda Eiichiro')
+    ->name(One Piece')
+    ->author(Oda Eiichiro')
     ->genres('include', ['Action', 'Drama', 'Historical'])
-    ->releasedYear('<', '2017')
-    ->rating('>', 4)
     ->completed(0)
-    ->sortBy('name', 'ASC')
-    ->page(1)
     ->get();
 
 # Retrieving all info about a manga
+$manga_uid = "One-Piece";
 $manga = $manager
-	->resource('one_piece')
+	->resource($manga_uid)
 	->get();
 
 
 # Retrieving all scans for a given manga, volume and chapter
+$chapter_id = 1;
+$manga_uid = "One-Piece";
 $scans = $manager
-	->scan('one_piece', 1, 1)
+	->scan($manga_uid, $chapter_id)
 	->get();
 
 # Retrieving last updates 
 $results = $manager->releases()->page(1)->get();
 
-# Perform a query in the directory
-$results = $manager
-    ->directory()
-    ->browseBy('genre', 'Action')
-    ->sortBy('name') 
-    ->page(1)
-    ->get();
 ```
 
 
