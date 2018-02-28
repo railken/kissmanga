@@ -1,18 +1,18 @@
 <?php
 
-namespace Railken\Kissmanga;
+namespace Railken\Kissmanga\API\Scan;
 
-use Railken\Kissmanga\Exceptions as Exceptions;
 use Illuminate\Support\Collection;
+use Railken\Bag;
+use Railken\Kissmanga\Kissmanga;
 
-class KissmangaScanBuilder
+class Builder
 {
 
     /**
      * @var Kissmanga
      */
     protected $manager;
-
 
     /**
      * @var string
@@ -22,12 +22,7 @@ class KissmangaScanBuilder
     /**
      * @var string
      */
-    protected $chapter_number;
-
-    /**
-     * @var string
-     */
-    protected $volume_number;
+    protected $chapter_id;
 
     /**
      * Construct
@@ -38,6 +33,7 @@ class KissmangaScanBuilder
     {
         $this->manager = $manager;
     }
+
 
     /**
      * manga_uid
@@ -62,42 +58,17 @@ class KissmangaScanBuilder
     {
         return $this->manga_uid;
     }
-
+    
     /**
-     * volume_number
+     * chapter_id
      *
-     * @param string $volume_number
+     * @param string $chapter_id
      *
      * @return $this
      */
-    public function volumeNumber($volume_number)
+    public function chapterId($chapter_id)
     {
-        $this->volume_number = $volume_number;
-
-        return $this;
-    }
-
-    /**
-     * Return volume_number
-     *
-     * @return string
-     */
-    public function getVolumeNumber()
-    {
-        return $this->volume_number;
-    }
-
-
-    /**
-     * chapter_number
-     *
-     * @param string $chapter_number
-     *
-     * @return $this
-     */
-    public function chapterNumber($chapter_number)
-    {
-        $this->chapter_number = $chapter_number;
+        $this->chapter_id = $chapter_id;
 
         return $this;
     }
@@ -107,9 +78,9 @@ class KissmangaScanBuilder
      *
      * @return string
      */
-    public function getChapterNumber()
+    public function getChapterId()
     {
-        return $this->chapter_number;
+        return $this->chapter_id;
     }
 
     /**
@@ -119,7 +90,7 @@ class KissmangaScanBuilder
      */
     public function get()
     {
-        $request = new KissmangaScanRequest($this->manager);
+        $request = new Request($this->manager);
 
         return $request->send($this);
     }

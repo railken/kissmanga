@@ -103,14 +103,13 @@ class Kissmanga extends KissmangaReader
      * Request all scans for a chapter
      *
      * @param string $manga_uid
-     * @param string $volume_number
-     * @param string $chapter_number
+     * @param string $chapter_id
      *
      * @return KissmangaScanBuilder
      */
-    public function scan($manga_uid, $volume_number, $chapter_number)
+    public function scan($manga_uid, $chapter_id)
     {
-        return (new KissmangaScanBuilder($this))->mangaUid($manga_uid)->volumeNumber($volume_number)->chapterNumber($chapter_number);
+        return (new API\Scan\Builder($this))->mangaUid($manga_uid)->chapterId($chapter_id);
     }
 
     /**

@@ -60,7 +60,9 @@ abstract class KissmangaReader implements MangaReaderContract
         ];
 
         $params['query_array_format'] = 1;
-        $params['cookies'] = CookieJar::fromArray($stream->getCookiesOriginal(), parse_url($this->urls['app'])['host']);
+        $params['cookies'] = CookieJar::fromArray(array_merge([
+            'vns_readType1' => 1,
+        ], $stream->getCookiesOriginal()), parse_url($this->urls['app'])['host']);
 
         // $params['debug'] = true;
 
@@ -92,6 +94,7 @@ abstract class KissmangaReader implements MangaReaderContract
 
             return $this->request($method, $url, $data, $retry-1);
         }
+
 
 
         if ($response->getStatusCode() != "200" and $retry > 0) {
