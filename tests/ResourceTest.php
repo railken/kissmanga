@@ -24,7 +24,7 @@ class ResourceTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\Exceptions\KissmangaResourceRequestNotFoundException
+     * @expectedException Railken\Kissmanga\API\Resource\Exceptions\RequestNotFoundException
      */
     public function testKissmangaResourceRequestNotFoundException()
     {
@@ -34,10 +34,9 @@ class ResourceTest extends TestCase
     public function testBasics()
     {
       
-        $manga = $this->manager->resource('fairy-tail')->get();
+        $manga = $this->manager->resource('Fairy-Tail')->get();
 
-        $this->assertEquals('fairy-tail', $manga->uid);
-
-
+        $this->assertEquals('Fairy Tail', $manga->name);
+        // print_r($manga);
     }
 }
