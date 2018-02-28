@@ -32,7 +32,7 @@ $manager = new \Railken\Kissmanga\Kissmanga();
 # Searching a manga
 $results = $manager
     ->search()
-    ->name(One Piece')
+    ->name('One Piece')
     ->author(Oda Eiichiro')
     ->genres('include', ['Action', 'Drama', 'Historical'])
     ->completed(0)
