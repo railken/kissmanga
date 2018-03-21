@@ -37,10 +37,16 @@ class Parser
         $node = HtmlPageCrawler::create($html);
 
 
-        $chko = strpos($html, "chko") 
-            ? "72nnasdasd9asdn123nasdbasd612basd"
-            : "mshsdf832nsdbash20asdm";
+        if (!strpos($html, "chko")) {
+            $chko = "mshsdf832nsdbash20asdm";
+        } else {
 
+            preg_match("/var (.*) \= \[\"(.*)\"\]; chko/", $html, $matches);
+
+            $chko = preg_replace_callback("/(\\\\x)([0-9A-Fa-f]+)/u", function($matched) {
+                return chr(hexdec($matched[2]));
+            }, $matches[2]);
+        }
 
         $key = pack("H*", hash("sha256", $chko));
         $iv =  pack("H*", "a5e8e2e9c2721be0a84ad660c472c1f3");
