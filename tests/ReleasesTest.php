@@ -23,8 +23,6 @@ class ReleasesTest extends TestCase
         $this->manager = new Kissmanga();
     }
 
-
-    
     public function testBasics()
     {
 
