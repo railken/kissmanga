@@ -11,7 +11,7 @@ class Kissmanga extends KissmangaReader
      * @var string
      */
     protected $urls = [
-        'app' => 'http://kissmanga.com/',
+        'app' => 'https://kissmanga.com',
     ];
 
     /**

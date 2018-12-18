@@ -3,17 +3,28 @@
 namespace Railken\Kissmanga;
 
 use GuzzleHttp\Client;
-use KyranRana\CloudflareBypass\RequestMethod\CFStream;
-use KyranRana\CloudflareBypass\RequestMethod\CFCurl;
+use CloudflareBypass\CFBypass;
 use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\SetCookie;
+use Symfony\Component\Cache\Simple\FilesystemCache;
 
 abstract class KissmangaReader implements MangaReaderContract
 {
 
     /**
-     * @var GuzzleHttp\Client
+     * @var \GuzzleHttp\Client
      */
     protected $client;
+
+    /**
+     * @var \Symfony\Component\Cache\Simple\FilesystemCache
+     */
+    protected $cache;
+
+    /**
+     * @var string
+     */
+    protected $agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36';
 
     /**
      * Constructor
@@ -21,6 +32,7 @@ abstract class KissmangaReader implements MangaReaderContract
     public function __construct()
     {
         $this->client = new Client(['base_uri' => $this->urls['app'], 'query_array_format' => 1]);
+        $this->cache = new FilesystemCache('kissmanga.com', 3600);
     }
 
     /**
@@ -35,36 +47,32 @@ abstract class KissmangaReader implements MangaReaderContract
         $params = [];
         $params['http_errors'] = false;
 
-     
-
-
         $fullurl = $this->urls['app'].$url;
-        
-        $stream_cf_wrapper = new CFStream([
-            'cache'         => true,
-            'max_attempts'  => 5
-        ]);
-
-        $agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
-
-
-        $stream = $stream_cf_wrapper->create($fullurl, [
-            'http' => [
-                'method' => "GET",
-                'header' => "User-Agent:$agent"
-            ]
-        ]);
 
         $params['headers'] = [
-            'User-Agent' => "$agent",
+            'User-Agent' => $this->agent,
         ];
 
         $params['query_array_format'] = 1;
-        $params['cookies'] = CookieJar::fromArray(array_merge([
-            'vns_readType1' => 1,
-        ], $stream->getCookiesOriginal()), parse_url($this->urls['app'])['host']);
 
         // $params['debug'] = true;
+
+
+        if (!$this->cache->has('cookies')) {
+            $this->client->getConfig('handler')->push(Middleware::create());
+
+            $cookies = new \GuzzleHttp\Cookie\CookieJar;
+            $cookies->setCookie(new SetCookie([
+                'Domain'  => '.kissmanga.com',
+                'Name'    => 'vns_readType1',
+                'Value'   => 1,
+                'Discard' => true
+            ]));
+
+        } else {
+            $cookies = unserialize($this->cache->get('cookies'));
+        }
+        
 
         switch ($method) {
             case 'POST': case 'PUT':
@@ -83,10 +91,13 @@ abstract class KissmangaReader implements MangaReaderContract
             break;
         }
 
-        $response = $this->client->request($method, $url, $params);
+        $params['cookies'] = $cookies;
 
+        $response = $this->client->request($method, $url, $params);
         $contents = $response->getBody()->getContents();
 
+        $this->cache->set('cookies', serialize($cookies));
+        
 
         if ($response->getStatusCode() == "502" and $retry > 0) {
 
