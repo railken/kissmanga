@@ -33,7 +33,7 @@ $manager = new \Railken\Kissmanga\Kissmanga();
 $results = $manager
     ->search()
     ->name('One Piece')
-    ->author(Oda Eiichiro')
+    ->author('Oda Eiichiro')
     ->genres('include', ['Action', 'Drama', 'Historical'])
     ->completed(0)
     ->get();
