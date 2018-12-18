@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Railken\Kissmanga;
 
@@ -33,11 +33,12 @@ class Middleware extends CloudflareMiddleware
 
         $params = array_combine([
             'jschl_vc',
-            'pass', 
-            'jschl_answer' 
+            'pass',
+            'jschl_answer'
         ], CFBypass::bypass($response->getBody(), $request->getUri(), true));
 
-        return new Uri(sprintf("/cdn-cgi/l/chk_jschl?%s",
+        return new Uri(sprintf(
+            "/cdn-cgi/l/chk_jschl?%s",
             http_build_query(array_merge($params, $query))
         ));
     }

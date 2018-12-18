@@ -30,7 +30,7 @@ class Builder
     }
 
     /**
-     * The page 
+     * The page
      *
      * @param string $page
      *

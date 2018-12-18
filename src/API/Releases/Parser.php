@@ -43,15 +43,17 @@ class Parser
 
             $title = $node->filter('a:nth-child(1)');
 
-            if (count($title) === 0)
+            if (count($title) === 0) {
                 return null;
+            }
 
             return $bag
                 ->set('uid', basename($title->attr('href')))
                 ->set('name', trim($title->html()))
             ;
-            
-        })))->filter(function($v) { return $v; })->values());
+        })))->filter(function ($v) {
+            return $v;
+        })->values());
         
 
 

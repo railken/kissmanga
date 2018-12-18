@@ -49,8 +49,6 @@ class SearchTest extends TestCase
 
     public function testBasics()
     {
-       
-
         $m = $this->manager;
 
 
@@ -65,12 +63,10 @@ class SearchTest extends TestCase
 
         $results = $results->results;
         
-        $manga = $results->filter(function($v) {
+        $manga = $results->filter(function ($v) {
             return $v->name == 'One Piece';
         })->first();
 
         $this->assertEquals("One-Piece", $manga->uid);
-
-
     }
 }

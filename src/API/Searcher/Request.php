@@ -43,7 +43,6 @@ class Request
 
         # Genres
         $params['genres'] = (new Collection($this->manager->getGenres()))->mapWithKeys(function ($item, $key) use ($builder) {
-
             return [$key => in_array($item, $builder->getGenres()->get('value')->toArray()) ? ($builder->getGenres()->get('filter') == 'include' ? 1 : 2) : 0];
         })->toArray();
 
@@ -55,7 +54,7 @@ class Request
 
 
         $query = http_build_query($params, null, '&');
-        $string = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query); 
+        $string = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $query);
 
         $results = $this->manager->request("POST", "/AdvanceSearch", $string);
 

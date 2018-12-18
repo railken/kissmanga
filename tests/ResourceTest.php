@@ -33,7 +33,6 @@ class ResourceTest extends TestCase
 
     public function testBasics()
     {
-      
         $manga = $this->manager->resource('Overlord')->get();
 
         $this->assertEquals('Overlord', $manga->name);

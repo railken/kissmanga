@@ -68,7 +68,6 @@ abstract class KissmangaReader implements MangaReaderContract
                 'Value'   => 1,
                 'Discard' => true
             ]));
-
         } else {
             $cookies = unserialize($this->cache->get('cookies'));
         }
@@ -81,7 +80,6 @@ abstract class KissmangaReader implements MangaReaderContract
                     $params['headers']['Content-Type'] = 'application/x-www-form-urlencoded';
                     $params['body'] = $data;
                 } else {
-
                     $params['form_params'] = $data;
                 }
             break;
@@ -100,7 +98,6 @@ abstract class KissmangaReader implements MangaReaderContract
         
 
         if ($response->getStatusCode() == "502" and $retry > 0) {
-
             sleep(10);
 
             return $this->request($method, $url, $data, $retry-1);
@@ -109,7 +106,6 @@ abstract class KissmangaReader implements MangaReaderContract
 
 
         if ($response->getStatusCode() != "200" and $retry > 0) {
-
             return $this->request($method, $url, $data, $retry-1);
         }
         

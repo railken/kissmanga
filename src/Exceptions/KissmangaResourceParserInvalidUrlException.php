@@ -6,6 +6,5 @@ class KissmangaResourceParserInvalidUrlException extends KissmangaException
 {
     public function __construct()
     {
-    	
     }
 }

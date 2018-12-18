@@ -30,7 +30,7 @@ class Builder
     }
 
     /**
-     * The uid 
+     * The uid
      *
      * @param string $uid
      *

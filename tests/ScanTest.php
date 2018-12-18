@@ -25,17 +25,12 @@ class ScanTest extends TestCase
 
     public function testBasics()
     {
-
         $manga = $this->manager->resource('Fairy-Tail')->get();
 
         $chapter = $manga->volumes->first()->chapters[0];
 
-        $this->manager->scan($manga->uid, $chapter->id)->get()->each(function($scan) {
-
+        $this->manager->scan($manga->uid, $chapter->id)->get()->each(function ($scan) {
             $this->assertEquals(true, strpos($scan->scan, "http") !== false);
         });
-
-
-
     }
 }

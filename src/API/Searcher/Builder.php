@@ -59,7 +59,7 @@ class Builder
     /**
      * Throw an exceptions if value doesn't match with suggestion
      *
-     * @param string $class 
+     * @param string $class
      * @param mixed $value
      * @param array $suggestions
      *
