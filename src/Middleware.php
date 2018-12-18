@@ -12,19 +12,6 @@ use CloudflareBypass\CFBypass;
 
 class Middleware extends CloudflareMiddleware
 {
-    
-    /**
-     * @param \Psr\Http\Message\RequestInterface  $request
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @return \Psr\Http\Message\RequestInterface
-     * @throws \Exception
-     */
-    protected function modifyRequest(RequestInterface $request, ResponseInterface $response)
-    {
-        return parent::modifyRequest($request, $response);
-    }
-
     /**
      * Try to solve the JavaScript challenge
      *
