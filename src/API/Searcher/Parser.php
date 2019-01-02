@@ -47,7 +47,8 @@ class Parser
 
             return $bag
                 ->set('uid', basename($title->attr('href')))
-                ->set('name', trim($title->html()))
+                ->set('name', html_entity_decode(trim($title->html())))
+                ->set('url', "https://kissmanga.com/Manga/".rawurlencode(basename($title->attr('href'))))
             ;
         })))->filter(function ($v) {
             return $v;

@@ -41,8 +41,9 @@ class Parser
 
         $bag = new Bag();
         $bag
-            ->set('name', $name)
+            ->set('name', html_entity_decode(trim($name)))
             ->set('uid', basename($head->filter("[rel='alternate']")->attr('href')))
+            ->set('url', "https://kissmanga.com/Manga/".rawurlencode(basename($title->attr('href'))))
             ->set('aliases', $main->filter('p:nth-of-type(1) > a')->each(function ($node) {
                 return $node->text();
             }))
