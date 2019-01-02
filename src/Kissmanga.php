@@ -34,6 +34,7 @@ class Kissmanga extends KissmangaReader
         'Harem',
         'Historical',
         'Horror',
+        'Isekai',
         'Josei',
         'Lolicon',
         'Manga',

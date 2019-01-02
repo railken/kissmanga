@@ -57,8 +57,6 @@ class SearchTest extends TestCase
 
         $results = $results->results;
 
-        print_r($results);
-        
         $manga = $results->filter(function ($v) {
             return $v->name == 'One Piece';
         })->first();
