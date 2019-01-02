@@ -2,25 +2,22 @@
 
 namespace Railken\Kissmanga\API\Releases;
 
-use Illuminate\Support\Collection;
-use Railken\Bag;
 use Railken\Kissmanga\Kissmanga;
 
 class Builder
 {
-
     /**
      * @var Kissmanga
      */
     protected $manager;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $page = 1;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Kissmanga $manager
      */
@@ -30,7 +27,7 @@ class Builder
     }
 
     /**
-     * The page
+     * The page.
      *
      * @param string $page
      *
@@ -39,12 +36,12 @@ class Builder
     public function page($page)
     {
         $this->page = $page;
-        
+
         return $this;
     }
 
     /**
-     * Return page
+     * Return page.
      *
      * @return string
      */
@@ -54,7 +51,7 @@ class Builder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

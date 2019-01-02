@@ -2,21 +2,18 @@
 
 namespace Railken\Kissmanga\API\Resource;
 
-use Illuminate\Support\Collection;
-
 use Railken\Kissmanga\Kissmanga;
-use \Wa72\HtmlPageDom\HtmlPageCrawler;
+use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class Request
 {
-    
     /**
      * @var Kissmanga
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Kissmanga $manager
      */
@@ -26,7 +23,7 @@ class Request
     }
 
     /**
-     * Send the request for the research
+     * Send the request for the research.
      *
      * @param Builder $builder
      *
@@ -34,9 +31,9 @@ class Request
      */
     public function send(Builder $builder)
     {
-        $results = $this->manager->request("GET", "/Manga/{$builder->getUid()}", []);
+        $results = $this->manager->request('GET', "/Manga/{$builder->getUid()}", []);
 
-        if (strpos(HtmlPageCrawler::create($results)->filter('title')->text(), "Error") !== false) {
+        if (strpos(HtmlPageCrawler::create($results)->filter('title')->text(), 'Error') !== false) {
             throw new Exceptions\RequestNotFoundException($builder->getUid());
         }
 

@@ -3,20 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use Railken\Kissmanga\Kissmanga;
 
-use Railken\Kissmanga\Exceptions as Exceptions;
-
 class ResourceTest extends TestCase
 {
-
     /**
      * @var Railken\Kissmanga\Kissmanga
      */
     private $manager;
 
     /**
-     * Called on setup
-     *
-     * @return void
+     * Called on setup.
      */
     public function setUp()
     {
@@ -24,7 +19,7 @@ class ResourceTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\API\Resource\Exceptions\RequestNotFoundException
+     * @expectedException \Railken\Kissmanga\API\Resource\Exceptions\RequestNotFoundException
      */
     public function testKissmangaResourceRequestNotFoundException()
     {

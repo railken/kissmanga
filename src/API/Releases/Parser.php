@@ -2,21 +2,20 @@
 
 namespace Railken\Kissmanga\API\Releases;
 
-use \Wa72\HtmlPageDom\HtmlPageCrawler;
 use Illuminate\Support\Collection;
 use Railken\Bag;
 use Railken\Kissmanga\Kissmanga;
+use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class Parser
 {
-    
     /*
      * @var Kissmanga
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Kissmanga $manager
      */
@@ -26,10 +25,9 @@ class Parser
     }
 
     /**
-     * Parse the response
+     * Parse the response.
      *
-     * @return string $html
-     *
+     * @return string                  $html
      * @return KissmangaSearchResponse
      */
     public function parse($html)
@@ -54,8 +52,6 @@ class Parser
         })))->filter(function ($v) {
             return $v;
         })->values());
-        
-
 
         return $bag;
 

@@ -2,13 +2,10 @@
 
 namespace Railken\Kissmanga\API\Scan;
 
-use Illuminate\Support\Collection;
-use Railken\Bag;
 use Railken\Kissmanga\Kissmanga;
 
 class Builder
 {
-
     /**
      * @var Kissmanga
      */
@@ -25,7 +22,7 @@ class Builder
     protected $chapter_id;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Kissmanga $manager
      */
@@ -34,9 +31,8 @@ class Builder
         $this->manager = $manager;
     }
 
-
     /**
-     * manga_uid
+     * manga_uid.
      *
      * @param string $manga_uid
      *
@@ -50,7 +46,7 @@ class Builder
     }
 
     /**
-     * Return manga_uid
+     * Return manga_uid.
      *
      * @return string
      */
@@ -58,9 +54,9 @@ class Builder
     {
         return $this->manga_uid;
     }
-    
+
     /**
-     * chapter_id
+     * chapter_id.
      *
      * @param string $chapter_id
      *
@@ -74,7 +70,7 @@ class Builder
     }
 
     /**
-     * Return chapter_number
+     * Return chapter_number.
      *
      * @return string
      */
@@ -84,7 +80,7 @@ class Builder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

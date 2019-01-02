@@ -6,6 +6,6 @@ class KissmangaParserDateNotSupportedException extends KissmangaException
 {
     public function __construct($date)
     {
-        $this->message = sprintf("Format %s not supported", $date);
+        $this->message = sprintf('Format %s not supported', $date);
     }
 }

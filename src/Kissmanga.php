@@ -4,9 +4,8 @@ namespace Railken\Kissmanga;
 
 class Kissmanga extends KissmangaReader
 {
-
     /**
-     * Base url Kissmanga
+     * Base url Kissmanga.
      *
      * @var string
      */
@@ -15,60 +14,60 @@ class Kissmanga extends KissmangaReader
     ];
 
     /**
-     * List of genres available on Kissmanga
+     * List of genres available on Kissmanga.
      *
      * @var string[]
      */
     protected $genres = [
-        "4-Koma",
-        "Action",
-        "Adult",
-        "Adventure",
-        "Comedy",
-        "Comic",
-        "Cooking",
-        "Doujinshi",
-        "Drama",
-        "Ecchi",
-        "Fantasy",
-        "Gender Bender",
-        "Harem",
-        "Historical",
-        "Horror",
-        "Josei",
-        "Lolicon",
-        "Manga",
-        "Manhua",
-        "Manhwa",
-        "Martial Arts",
-        "Mature",
-        "Mecha",
-        "Medical",
-        "Music",
-        "Mystery",
-        "One shot",
-        "Psychological",
-        "Romance",
-        "School Life",
-        "Sci-fi",
-        "Seinen",
-        "Shotacon",
-        "Shoujo",
-        "Shoujo Ai",
-        "Shounen",
-        "Shounen Ai",
-        "Slice of Life",
-        "Smut",
-        "Sports",
-        "Supernatural",
-        "Tragedy",
-        "Webtoon",
-        "Yaoi",
-        "Yuri"
+        '4-Koma',
+        'Action',
+        'Adult',
+        'Adventure',
+        'Comedy',
+        'Comic',
+        'Cooking',
+        'Doujinshi',
+        'Drama',
+        'Ecchi',
+        'Fantasy',
+        'Gender Bender',
+        'Harem',
+        'Historical',
+        'Horror',
+        'Josei',
+        'Lolicon',
+        'Manga',
+        'Manhua',
+        'Manhwa',
+        'Martial Arts',
+        'Mature',
+        'Mecha',
+        'Medical',
+        'Music',
+        'Mystery',
+        'One shot',
+        'Psychological',
+        'Romance',
+        'School Life',
+        'Sci-fi',
+        'Seinen',
+        'Shotacon',
+        'Shoujo',
+        'Shoujo Ai',
+        'Shounen',
+        'Shounen Ai',
+        'Slice of Life',
+        'Smut',
+        'Sports',
+        'Supernatural',
+        'Tragedy',
+        'Webtoon',
+        'Yaoi',
+        'Yuri',
     ];
 
     /**
-     * Retrieve base url
+     * Retrieve base url.
      *
      * @return string
      */
@@ -78,7 +77,7 @@ class Kissmanga extends KissmangaReader
     }
 
     /**
-     * Perform a search
+     * Perform a search.
      *
      * @return KissmangaSearchBuilder
      */
@@ -88,7 +87,7 @@ class Kissmanga extends KissmangaReader
     }
 
     /**
-     * Request a specific resource
+     * Request a specific resource.
      *
      * @param string $uid
      *
@@ -100,7 +99,7 @@ class Kissmanga extends KissmangaReader
     }
 
     /**
-     * Request all scans for a chapter
+     * Request all scans for a chapter.
      *
      * @param string $manga_uid
      * @param string $chapter_id
@@ -113,7 +112,7 @@ class Kissmanga extends KissmangaReader
     }
 
     /**
-     * Perform a search in last releases
+     * Perform a search in last releases.
      *
      * @return KissmangaReleasesBuilder
      */
@@ -123,7 +122,7 @@ class Kissmanga extends KissmangaReader
     }
 
     /**
-     * Perform a search in directory
+     * Perform a search in directory.
      *
      * @return KissmangaDirectoryBuilder
      */
@@ -133,7 +132,7 @@ class Kissmanga extends KissmangaReader
     }
 
     /**
-     * Retrieve a list of all resources
+     * Retrieve a list of all resources.
      *
      * @return KissmangaIndexBuilder
      */
@@ -143,7 +142,7 @@ class Kissmanga extends KissmangaReader
     }
 
     /**
-     * Retrieve genres available on Kissmanga
+     * Retrieve genres available on Kissmanga.
      *
      * @return array
      */

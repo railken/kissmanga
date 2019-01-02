@@ -3,20 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use Railken\Kissmanga\Kissmanga;
 
-use Railken\Kissmanga\Exceptions as Exceptions;
-
 class ScanTest extends TestCase
 {
-
     /**
      * @var Railken\Kissmanga\Kissmanga
      */
     private $manager;
 
     /**
-     * Called on setup
-     *
-     * @return void
+     * Called on setup.
      */
     public function setUp()
     {
@@ -30,7 +25,7 @@ class ScanTest extends TestCase
         $chapter = $manga->volumes->first()->chapters[0];
 
         $this->manager->scan($manga->uid, $chapter->id)->get()->each(function ($scan) {
-            $this->assertEquals(true, strpos($scan->scan, "http") !== false);
+            $this->assertEquals(true, strpos($scan->scan, 'http') !== false);
         });
     }
 }

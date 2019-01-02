@@ -2,13 +2,10 @@
 
 namespace Railken\Kissmanga\API\Resource;
 
-use Illuminate\Support\Collection;
-use Railken\Bag;
 use Railken\Kissmanga\Kissmanga;
 
 class Builder
 {
-
     /**
      * @var Kissmanga
      */
@@ -20,7 +17,7 @@ class Builder
     protected $uid;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Kissmanga $manager
      */
@@ -30,7 +27,7 @@ class Builder
     }
 
     /**
-     * The uid
+     * The uid.
      *
      * @param string $uid
      *
@@ -44,7 +41,7 @@ class Builder
     }
 
     /**
-     * Return uid
+     * Return uid.
      *
      * @return string
      */
@@ -54,7 +51,7 @@ class Builder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

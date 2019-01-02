@@ -8,42 +8,41 @@ use Railken\Kissmanga\Kissmanga;
 
 class Builder
 {
-
     /**
      * @var Kissmanga
      */
     protected $manager;
 
     /**
-     * Name of resource searched
+     * Name of resource searched.
      *
      * @var Bag
      */
     protected $name;
 
     /**
-     * Name of author searched
+     * Name of author searched.
      *
      * @var Bag
      */
     protected $author;
 
     /**
-     * Genres
+     * Genres.
      *
      * @var Bag
      */
     protected $genres;
 
     /**
-     * Completed
+     * Completed.
      *
-     * @var boolean
+     * @var bool
      */
     protected $completed = null;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Kissmanga $manager
      */
@@ -57,13 +56,11 @@ class Builder
     }
 
     /**
-     * Throw an exceptions if value doesn't match with suggestion
+     * Throw an exceptions if value doesn't match with suggestion.
      *
      * @param string $class
-     * @param mixed $value
-     * @param array $suggestions
-     *
-     * @return void
+     * @param mixed  $value
+     * @param array  $suggestions
      */
     public function throwExceptionInvalidValue($class, $value, $suggestions)
     {
@@ -78,9 +75,8 @@ class Builder
         }
     }
 
-
     /**
-     * Set the name of resource searched
+     * Set the name of resource searched.
      *
      * @param string $name
      *
@@ -90,13 +86,12 @@ class Builder
     {
         $this->name
             ->set('value', $name);
-        
+
         return $this;
     }
 
-
     /**
-     * Retrieve name
+     * Retrieve name.
      *
      * @return string
      */
@@ -106,7 +101,7 @@ class Builder
     }
 
     /**
-     * Set the author of resource searched
+     * Set the author of resource searched.
      *
      * @param string $author
      *
@@ -116,12 +111,12 @@ class Builder
     {
         $this->author
             ->set('value', $author);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve author
+     * Retrieve author.
      *
      * @return string
      */
@@ -131,15 +126,14 @@ class Builder
     }
 
     /**
-     * Set genres
+     * Set genres.
      *
      * @param string $filter
-     * @param array $genres
+     * @param array  $genres
      */
     public function genres($filter, $genres)
     {
         $this->throwExceptionInvalidValue(Exceptions\BuilderInvalidGenresFilterException::class, $filter, ['include', 'exclude']);
-
 
         $this->throwExceptionInvalidValue(Exceptions\BuilderInvalidGenresValueException::class, $genres, $this->manager->getGenres());
 
@@ -151,7 +145,7 @@ class Builder
     }
 
     /**
-     * Retrieve genres
+     * Retrieve genres.
      *
      * @return Bag
      */
@@ -161,7 +155,7 @@ class Builder
     }
 
     /**
-     * Set the sort of resource searched
+     * Set the sort of resource searched.
      *
      * @param string $value
      *
@@ -171,13 +165,13 @@ class Builder
     {
         $this->throwExceptionInvalidValue(Exceptions\BuilderInvalidCompletedValueException::class, $value, [null, '1', '0']);
 
-        $this->completed = (boolean)$value;
-        
+        $this->completed = (bool) $value;
+
         return $this;
     }
 
     /**
-     * Retrieve sort
+     * Retrieve sort.
      *
      * @return string
      */
@@ -187,7 +181,7 @@ class Builder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

@@ -2,20 +2,17 @@
 
 namespace Railken\Kissmanga\API\Releases;
 
-use Illuminate\Support\Collection;
-
 use Railken\Kissmanga\Kissmanga;
 
 class Request
 {
-    
     /*
      * @var Kissmanga
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Kissmanga $manager
      */
@@ -25,7 +22,7 @@ class Request
     }
 
     /**
-     * Send the request for the research
+     * Send the request for the research.
      *
      * @param KissmangaSearchBuilder $builder
      *
@@ -33,7 +30,7 @@ class Request
      */
     public function send(Builder $builder)
     {
-        $results = $this->manager->request("GET", "/MangaList/LatestUpdate?page={$builder->getPage()}", []);
+        $results = $this->manager->request('GET', "/MangaList/LatestUpdate?page={$builder->getPage()}", []);
 
         $parser = new Parser($this->manager);
 

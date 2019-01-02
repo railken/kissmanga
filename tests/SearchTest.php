@@ -3,20 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use Railken\Kissmanga\Kissmanga;
 
-use Railken\Kissmanga\Exceptions as Exceptions;
-
 class SearchTest extends TestCase
 {
-
     /**
      * @var Railken\Kissmanga\Kissmanga
      */
     private $manager;
 
     /**
-     * Called on setup
-     *
-     * @return void
+     * Called on setup.
      */
     public function setUp()
     {
@@ -24,7 +19,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidGenresFilterException
+     * @expectedException \Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidGenresFilterException
      */
     public function testKissmangaSearchBuilderInvalidGenresFilterException()
     {
@@ -32,7 +27,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidGenresValueException
+     * @expectedException \Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidGenresValueException
      */
     public function testKissmangaSearchBuilderInvalidGenresValueException()
     {
@@ -40,7 +35,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidCompletedValueException
+     * @expectedException \Railken\Kissmanga\API\Searcher\Exceptions\BuilderInvalidCompletedValueException
      */
     public function testKissmangaSearchBuilderInvalidCompletedValueException()
     {
@@ -51,8 +46,7 @@ class SearchTest extends TestCase
     {
         $m = $this->manager;
 
-
-        # Search manga
+        // Search manga
         $results = $m
             ->search()
             ->name('One Piece')
@@ -62,11 +56,13 @@ class SearchTest extends TestCase
             ->get();
 
         $results = $results->results;
+
+        print_r($results);
         
         $manga = $results->filter(function ($v) {
             return $v->name == 'One Piece';
         })->first();
 
-        $this->assertEquals("One-Piece", $manga->uid);
+        $this->assertEquals('One-Piece', $manga->uid);
     }
 }
