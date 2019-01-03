@@ -42,9 +42,9 @@ class Parser
         $bag = new Bag();
         $bag
             ->set('name', html_entity_decode(trim($name)))
-            ->set('description', $main->filter("p:nth-of-type(6)")->text())
+            ->set('description', $main->filter('p:nth-of-type(6)')->text())
             ->set('uid', basename($head->filter("[rel='alternate']")->attr('href')))
-            ->set('url', "https://kissmanga.com/Manga/".rawurlencode(basename($head->filter("[rel='alternate']")->attr('href'))))
+            ->set('url', 'https://kissmanga.com/Manga/'.rawurlencode(basename($head->filter("[rel='alternate']")->attr('href'))))
             ->set('aliases', $main->filter('p:nth-of-type(1) > a')->each(function ($node) {
                 return $node->text();
             }))
@@ -63,7 +63,7 @@ class Parser
                     return null;
                 }
 
-                $number = preg_replace("/Read|".preg_quote($name, '/')."|online|Chapter|\s/", "", $title->attr('title'));
+                $number = preg_replace('/Read|'.preg_quote($name, '/')."|online|Chapter|\s/", '', $title->attr('title'));
 
                 parse_str(parse_url($title->attr('href'))['query'], $query);
 
