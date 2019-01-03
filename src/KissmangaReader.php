@@ -53,12 +53,8 @@ abstract class KissmangaReader implements MangaReaderContract
             'User-Agent' => $this->agent,
         ];
 
-        if (!$this->cache->has('cookies')) {
-            $this->cache->set('cookies', serialize($this->retrieveCookies()));
-        }
+        $cookies = $this->getCachedCookies();
 
-        $cookies = unserialize($this->cache->get('cookies'));
-        
         switch ($method) {
             case 'POST': case 'PUT':
 
@@ -126,6 +122,15 @@ abstract class KissmangaReader implements MangaReaderContract
         return $cookies;
     }
 
+    public function getCachedCookies()
+    {
+        if (!$this->cache->has('cookies')) {
+            $this->cache->set('cookies', serialize($this->retrieveCookies()));
+        }
+
+        return unserialize($this->cache->get('cookies'));
+    }
+
     /**
      * Send a request
      *
@@ -136,5 +141,10 @@ abstract class KissmangaReader implements MangaReaderContract
     public function requestMobile($method, $url, $data)
     {
         return $this->request($method, $this->urls['mobile'].$url, $data);
+    }
+
+    public function getUserAgent()
+    {
+        return $this->agent;
     }
 }
